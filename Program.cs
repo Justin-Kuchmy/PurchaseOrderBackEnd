@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using PurchaseOrderBackEnd.Vendors;
+using PurchaseOrderBackEnd.Products;
+using PurchaseOrderBackEnd.PurchaseOrders;
 using PurchaseOrderBackEnd.Data;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using PurchaseOrderBackEnd.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -17,6 +20,8 @@ builder.Services.AddDbContext<VendorAndProductsDBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("VendorProductsConnectionString")));
 
 builder.Services.AddScoped<VendorRepository>();
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<PurchaseOrders>();
 
 builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, build =>
 {

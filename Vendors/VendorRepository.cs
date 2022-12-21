@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace PurchaseOrderBackEnd.Vendors
 {
-    public class VendorRepository : IRepository<Vendor>
+    public class VendorRepository : IRepository<Vendor, int>
     {
         private readonly VendorAndProductsDBContext _db;
         public VendorRepository(VendorAndProductsDBContext db)
@@ -17,7 +17,7 @@ namespace PurchaseOrderBackEnd.Vendors
 
         public async Task<bool> deleteOne(int id)
         {
-            var vendor = await _db.Vendors.FindAsync(id);
+            var vendor = await _db.Vendors.FindAsync();
             if (vendor == null)
             {
                 return false;

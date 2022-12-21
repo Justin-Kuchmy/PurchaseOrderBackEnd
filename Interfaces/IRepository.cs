@@ -3,12 +3,12 @@ using PurchaseOrderBackEnd.Vendors;
 
 namespace PurchaseOrderBackEnd.Interfaces
 {
-    public interface IRepository<T>
+    public interface IRepository<T, K>
     {
-        Task<List<Vendor>> findAll();
+        Task<List<T>> findAll();
         Task<bool> updateOne(T entity);
-        Task<Vendor?> addOne(T entity);
-        Task<bool> deleteOne(int id);
+        Task<T?> addOne(T entity);
+        Task<bool> deleteOne(K type);
 
         Task Save();
     }
