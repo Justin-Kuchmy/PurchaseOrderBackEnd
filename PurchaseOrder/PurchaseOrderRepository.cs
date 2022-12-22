@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace PurchaseOrderBackEnd.PurchaseOrders
 {
-    public class PurchaseOrderRepository : IRepository<PurchaseOrder, int>
+    public class PurchaseOrderRepository : IRepository<PurchaseOrders, int>
     {
         private readonly VendorAndProductsDBContext _db;
         public PurchaseOrderRepository(VendorAndProductsDBContext db)
@@ -30,18 +30,26 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
             await Save();
             return true;
         }
-        public async Task<PurchaseOrder?> addOne(PurchaseOrder PurchaseOrderRequest)
+        public async Task<PurchaseOrders?> addOne(PurchaseOrders PurchaseOrderRequest)
         {
-            var result = await _db.PurchaseOrders.AddAsync(PurchaseOrderRequest);
-            if (result == null)
+            var poResult = await _db.PurchaseOrders.AddAsync(PurchaseOrderRequest);
+            if (poResult == null)
             {
                 return null;
+            }
+            foreach (var item in PurchaseOrderRequest.items)
+            {
+                var itemResult = _db.PurchaseOrderLineItems.AddAsync(item);
+                if (itemResult == null)
+                {
+                    return null;
+                }
             }
             await Save();
             return PurchaseOrderRequest;
 
         }        
-        public async Task<bool> updateOne(PurchaseOrder PurchaseOrderRequest)
+        public async Task<bool> updateOne(PurchaseOrders PurchaseOrderRequest)
         {
             var result = _db.PurchaseOrders.Update(PurchaseOrderRequest);
             if (result == null)
@@ -52,14 +60,14 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
             return true;
         }
 
-        public Task Save()
+        public async Task<int> Save()
         {
 
-            var result = _db.SaveChangesAsync();
+            var result = await _db.SaveChangesAsync();
             return result;
         }
 
-        public async Task<List<PurchaseOrder>> findAll()
+        public async Task<List<PurchaseOrders>> findAll()
         {
             var PurchaseOrders = await _db.PurchaseOrders.ToListAsync();
             return PurchaseOrders;

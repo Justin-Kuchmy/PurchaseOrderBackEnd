@@ -26,14 +26,14 @@ public class VendorController : Controller
     }
     [HttpPut]
     [Route("/api/vendors")]
-    public Task<bool> updateOne(Vendor vendor)
+    public Task<bool> updateOne(Vendors vendor)
     {
         var updatedVendor = _vendorRepository.updateOne(vendor);
         return updatedVendor;
     }
     [HttpPost]
     [Route("/api/vendors")]
-    public Task<Vendor?> addOne(Vendor vendor)
+    public Task<Vendors?> addOne(Vendors vendor)
     {
         var updatedVendor = _vendorRepository.addOne(vendor);
         return updatedVendor;

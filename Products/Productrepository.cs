@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using PurchaseOrderBackEnd.Data;
 using PurchaseOrderBackEnd.Interfaces;
 using PurchaseOrderBackEnd.Vendors;
+using System.Linq;
 using System.Numerics;
 
 
 namespace PurchaseOrderBackEnd.Products
 {
-    public class ProductRepository : IRepository<Product, string>
+    public class ProductRepository : IRepository<Products, string>
     {
         private readonly VendorAndProductsDBContext _db;
         public ProductRepository(VendorAndProductsDBContext db)
@@ -33,7 +34,7 @@ namespace PurchaseOrderBackEnd.Products
         }
 
  
-        public async Task<Product?> addOne(Product ProductRequest)
+        public async Task<Products?> addOne(Products ProductRequest)
         {
             var result = await _db.Products.AddAsync(ProductRequest);
             if (result == null)
@@ -44,7 +45,7 @@ namespace PurchaseOrderBackEnd.Products
             return ProductRequest;
 
         }
-        public async Task<bool> updateOne(Product ProductRequest)
+        public async Task<bool> updateOne(Products ProductRequest)
         {
             var result = _db.Products.Update(ProductRequest);
             if (result == null)
@@ -55,24 +56,34 @@ namespace PurchaseOrderBackEnd.Products
             return true;
         }
 
-        public Task Save()
+        public async Task<int> Save()
         {
 
-            var result = _db.SaveChangesAsync();
+            var result = await _db.SaveChangesAsync();
             return result;
         }
 
-        public async Task<List<Product>> findAll()
+        public async Task<List<Products>> findAll()
         {
             var Products = await _db.Products.ToListAsync();
             return Products;
         }
 
-        public async Task<List<Product>> findAllByVendor(int id)
+        public Task<List<Products>> findAllByVendor(int id)
         {
             //var _Products = await _db.Products.ToListAsync();
             var ProductsByVendor = _db.Products.Where(p => p.vendorid == id);
-            return ProductsByVendor.ToList();
+            return Task.FromResult(ProductsByVendor.ToList());
+        }
+
+        public async Task<Products?> getById(string id)
+        {
+            var prod = _db.Products.Where(p => p.id == id);
+            if (prod.FirstOrDefault() == null)
+            {
+                return null;
+            }
+            return prod.FirstOrDefault();
         }
 
     }

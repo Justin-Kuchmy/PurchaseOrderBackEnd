@@ -2,14 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PurchaseOrderBackEnd.Products
 {
-    public class Product
+    public class Products
     {
         [Key]
-        public string Id { get; set; } = "";
+        public string id { get; set; } = "";
         public int vendorid { get; set; }
         public string? name { get; set; }
-        public long costprice { get; set; }
-        public long msrp { get; set; }
+        public double costprice { get; set; }
+        public double msrp { get; set; }
         public int rop { get; set; }
         public int eoq { get; set; }
         public int qoh { get; set; }

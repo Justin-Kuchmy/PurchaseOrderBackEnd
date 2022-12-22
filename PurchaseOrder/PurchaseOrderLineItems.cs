@@ -4,12 +4,13 @@ using System.Runtime.InteropServices;
 
 namespace PurchaseOrderBackEnd.PurchaseOrderLineItems
 {
-    public class PurchaseOrderLineItem
+    public class PurchaseOrderLineItems
     {
-       public long Id { get; set; }
+        [Key]
+       public long id { get; set; }
        public long poid { get; set; }
        public string productid { get; set; }
        public int qty { get; set; }
-       public long price { get; set; }
+       public double price { get; set; }
     }
 }

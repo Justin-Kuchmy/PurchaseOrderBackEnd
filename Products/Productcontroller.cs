@@ -18,7 +18,13 @@ public class ProductController : Controller
         this._productRepository = productRepository;
         _db = db;
     }
-
+    [HttpGet]
+    [Route("/api/Products")]
+    public async Task<IActionResult> findAll()
+    {
+        var Products = await _productRepository.findAll();
+        return Ok(Products);
+    }
     [HttpGet]
     [Route("/api/Products/{id}")]
     public async Task<IActionResult> findAllByVendor([FromRoute] int id)
@@ -28,14 +34,14 @@ public class ProductController : Controller
     }
     [HttpPut]
     [Route("/api/Products")]
-    public Task<bool> updateOne(Product product)
+    public Task<bool> updateOne(Products product)
     {
         var updatedProduct = _productRepository.updateOne(product);
         return updatedProduct;
     }
     [HttpPost]
     [Route("/api/Products")]
-    public Task<Product?> addOne(Product product)
+    public Task<Products?> addOne(Products product)
     {
         var updatedProduct = _productRepository.addOne(product);
         return updatedProduct;

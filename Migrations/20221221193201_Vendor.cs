@@ -14,11 +14,11 @@ namespace PurchaseOrderBackEnd.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     vendorid = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    costprice = table.Column<long>(type: "bigint", nullable: false),
-                    msrp = table.Column<long>(type: "bigint", nullable: false),
+                    costprice = table.Column<double>(type: "float", nullable: false),
+                    msrp = table.Column<double>(type: "float", nullable: false),
                     rop = table.Column<int>(type: "int", nullable: false),
                     eoq = table.Column<int>(type: "int", nullable: false),
                     qoh = table.Column<int>(type: "int", nullable: false),
@@ -28,7 +28,7 @@ namespace PurchaseOrderBackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Product", x => x.id);
                 });
 
             migrationBuilder.CreateTable(

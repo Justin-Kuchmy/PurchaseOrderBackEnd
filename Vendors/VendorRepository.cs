@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace PurchaseOrderBackEnd.Vendors
 {
-    public class VendorRepository : IRepository<Vendor, int>
+    public class VendorRepository : IRepository<Vendors, int>
     {
         private readonly VendorAndProductsDBContext _db;
         public VendorRepository(VendorAndProductsDBContext db)
@@ -30,7 +30,7 @@ namespace PurchaseOrderBackEnd.Vendors
             await Save();
             return true;
         }
-        public async Task<Vendor?> addOne(Vendor vendorRequest)
+        public async Task<Vendors?> addOne(Vendors vendorRequest)
         {
             var result = await _db.Vendors.AddAsync(vendorRequest);
             if (result == null)
@@ -41,7 +41,7 @@ namespace PurchaseOrderBackEnd.Vendors
             return vendorRequest;
 
         }        
-        public async Task<bool> updateOne(Vendor vendorRequest)
+        public async Task<bool> updateOne(Vendors vendorRequest)
         {
             var result = _db.Vendors.Update(vendorRequest);
             if (result == null)
@@ -52,14 +52,14 @@ namespace PurchaseOrderBackEnd.Vendors
             return true;
         }
 
-        public Task Save()
+        public async Task<int> Save()
         {
 
-            var result = _db.SaveChangesAsync();
+            var result = await _db.SaveChangesAsync();
             return result;
         }
 
-        public async Task<List<Vendor>> findAll()
+        public async Task<List<Vendors>> findAll()
         {
             var vendors = await _db.Vendors.ToListAsync();
             return vendors;

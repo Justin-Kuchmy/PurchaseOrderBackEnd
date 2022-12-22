@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace PurchaseOrderBackEnd.Vendors { 
-    public class Vendor {
+    public class Vendors {
         [Key]
         public int Id { get; set; }
         public string Address1 { get; set; }

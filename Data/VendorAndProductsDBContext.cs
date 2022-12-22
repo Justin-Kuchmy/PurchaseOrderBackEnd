@@ -12,10 +12,10 @@ namespace PurchaseOrderBackEnd.Data
         {
 
         }
-        public DbSet<Vendor> Vendors { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-        public DbSet<PurchaseOrderLineItem> PurchaseOrderLineItems { get; set; }
+        public DbSet<Vendors.Vendors> Vendors { get; set; }
+        public DbSet<Products.Products> Products { get; set; }
+        public DbSet<PurchaseOrders.PurchaseOrders> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderLineItems.PurchaseOrderLineItems> PurchaseOrderLineItems { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
