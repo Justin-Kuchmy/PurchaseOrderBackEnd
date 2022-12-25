@@ -22,6 +22,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("VendorProductsCo
 builder.Services.AddScoped<VendorRepository>();
 builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<PurchaseOrderRepository>();
+builder.Services.AddScoped<PurchaseOrderLineItemRepository>();
 builder.Services.AddScoped<PurchaseOrderDAO>();
 
 builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, build =>

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
-using PurchaseOrderBackEnd.PurchaseOrderLineItems;
+using PurchaseOrderBackEnd.PurchaseOrders;
 
 namespace PurchaseOrderBackEnd.PurchaseOrders
 {
@@ -12,13 +12,13 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
         public long vendorid { get; set; }
         public double amount { get; set; } 
         public DateTime podate { get; set; }
-        public List<PurchaseOrderLineItems.PurchaseOrderLineItems> items { get; set; } = default!;
+        public List<PurchaseOrderLineItems> items { get; set; } = default!;
 
-        public void AddItem(PurchaseOrderLineItems.PurchaseOrderLineItems item)
-        {
-            this.items.Add(item);
-            return;
-        }
+        //public void AddItem(PurchaseOrderLineItems.PurchaseOrderLineItems item)
+        //{
+        //    this.items.Add(item);
+        //    return;
+        //}
 
     }
 }

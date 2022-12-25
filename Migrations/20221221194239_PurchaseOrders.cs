@@ -26,7 +26,7 @@ namespace PurchaseOrderBackEnd.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    poid = table.Column<long>(type: "bigint", nullable: false),
+                    PurchaseOrdersid = table.Column<long>(type: "bigint", nullable: false),
                     productid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     qty = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false)

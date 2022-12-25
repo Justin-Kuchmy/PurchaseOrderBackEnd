@@ -2,7 +2,6 @@
 using PurchaseOrderBackEnd.Vendors;
 using PurchaseOrderBackEnd.Products;
 using PurchaseOrderBackEnd.PurchaseOrders;
-using PurchaseOrderBackEnd.PurchaseOrderLineItems;
 
 namespace PurchaseOrderBackEnd.Data
 {
@@ -15,7 +14,7 @@ namespace PurchaseOrderBackEnd.Data
         public DbSet<Vendors.Vendors> Vendors { get; set; }
         public DbSet<Products.Products> Products { get; set; }
         public DbSet<PurchaseOrders.PurchaseOrders> PurchaseOrders { get; set; }
-        public DbSet<PurchaseOrderLineItems.PurchaseOrderLineItems> PurchaseOrderLineItems { get; set; }
+        public DbSet<PurchaseOrders.PurchaseOrderLineItems> PurchaseOrderLineItems { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

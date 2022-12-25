@@ -13,13 +13,15 @@ public class PurchaseOrderController : Controller
     //PurchaseOrder controller gets from the repo and the repo class gets from DBContext
     private readonly PurchaseOrderRepository _PurchaseOrderRepository;
     private readonly ProductRepository _ProductRepository;
+    private readonly PurchaseOrderLineItemRepository _PurchaseOrderLineItemRepository;
     private readonly PurchaseOrderDAO _purchaseOrderDAO;
     private readonly VendorAndProductsDBContext _db;
-    public PurchaseOrderController(PurchaseOrderRepository PurchaseOrderRepo, VendorAndProductsDBContext db, ProductRepository prodRepo, PurchaseOrderDAO po_DAO)
+    public PurchaseOrderController(PurchaseOrderRepository PurchaseOrderRepo, VendorAndProductsDBContext db, ProductRepository prodRepo, PurchaseOrderLineItemRepository poLineItemRepo, PurchaseOrderDAO po_DAO)
     {
         _PurchaseOrderRepository = PurchaseOrderRepo;
         _purchaseOrderDAO = po_DAO;
         _ProductRepository = prodRepo;
+        _PurchaseOrderLineItemRepository = poLineItemRepo;
         _db = db;
     }
     [HttpGet]
@@ -40,7 +42,7 @@ public class PurchaseOrderController : Controller
     [Route("/api/pos")]
     public async Task<PurchaseOrders?> addOne([FromBody] PurchaseOrders purchaseOrder)
     {
-        var newPO = await _purchaseOrderDAO.create(purchaseOrder, _ProductRepository);
+        var newPO = await _purchaseOrderDAO.create(purchaseOrder, _ProductRepository, _PurchaseOrderLineItemRepository, _db);
         var updatedPurchaseOrder = _PurchaseOrderRepository.addOne(newPO);
         return updatedPurchaseOrder.Result;
     }
