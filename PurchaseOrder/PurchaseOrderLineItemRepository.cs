@@ -39,15 +39,9 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
             return PurchaseOrderRequest;
 
         }
-        public async Task<bool> updateOne(PurchaseOrders PurchaseOrderRequest)
+        public Task<bool> updateOne(int id, PurchaseOrders PurchaseOrderRequest)
         {
-            var result = _db.PurchaseOrders.Update(PurchaseOrderRequest);
-            if (result == null)
-            {
-                return false;
-            }
-            await Save();
-            return true;
+            throw new NotImplementedException();
         }
 
         public async Task<int> Save()

@@ -6,7 +6,7 @@ namespace PurchaseOrderBackEnd.Interfaces
     public interface IRepository<T, K>
     {
         Task<List<T>> findAll();
-        Task<bool> updateOne(T entity);
+        Task<T?> updateOne(K type, T entity);
         Task<T?> addOne(T entity);
         Task<bool> deleteOne(K type);
 

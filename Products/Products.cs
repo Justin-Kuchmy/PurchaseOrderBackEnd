@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PurchaseOrderBackEnd.Products
 {
     public class Products
     {
         [Key]
-        public string id { get; set; } = "";
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string products_Id { get; set; } = "";
         public int vendorid { get; set; }
         public string? name { get; set; }
         public double costprice { get; set; }

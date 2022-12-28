@@ -33,11 +33,11 @@ public class ProductController : Controller
         return Ok(Products);
     }
     [HttpPut]
-    [Route("/api/Products")]
-    public Task<bool> updateOne(Products product)
+    [Route("/api/Products/{id}")]
+    public async Task<IActionResult> updateOne([FromRoute]string id, Products product)
     {
-        var updatedProduct = _productRepository.updateOne(product);
-        return updatedProduct;
+        var updatedProduct = await _productRepository.updateOne(id, product);
+        return Ok(updatedProduct);
     }
     [HttpPost]
     [Route("/api/Products")]

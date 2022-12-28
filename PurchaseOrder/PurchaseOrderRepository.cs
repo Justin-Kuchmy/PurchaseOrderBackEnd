@@ -37,27 +37,14 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
             {
                 return null;
             }
-            //foreach (var item in PurchaseOrderRequest.items)
-            //{
-            //    var itemResult = _db.PurchaseOrderLineItems.AddAsync(item);
-            //    if (itemResult == null)
-            //    {
-            //        return null;
-            //    }
-            //}
             await Save();
             return PurchaseOrderRequest;
 
         }        
-        public async Task<bool> updateOne(PurchaseOrders PurchaseOrderRequest)
+        public Task<PurchaseOrders?> updateOne(int id, PurchaseOrders PurchaseOrderRequest)
         {
-            var result = _db.PurchaseOrders.Update(PurchaseOrderRequest);
-            if (result == null)
-            {
-                return false;
-            }
-            await Save();
-            return true;
+            //Dont need to update a purchase order, once its added need to delete and create a new one. 
+            throw new NotImplementedException();
         }
 
         public async Task<int> Save()

@@ -17,7 +17,7 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
             foreach (PurchaseOrderLineItems item in clientRequest.items)
             {
                 PurchaseOrderLineItems realItem = new PurchaseOrderLineItems();
-                realItem.PurchaseOrdersid = realPurchaseOrder.id;
+                realItem.PurchaseOrdersid = realPurchaseOrder.po_id;
                 realItem.productid = item.productid;
                 realItem.qty = item.qty;
                 realItem.price = (long)Math.Floor((decimal)item.price);

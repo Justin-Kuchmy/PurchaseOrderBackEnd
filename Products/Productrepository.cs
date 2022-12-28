@@ -45,15 +45,24 @@ namespace PurchaseOrderBackEnd.Products
             return ProductRequest;
 
         }
-        public async Task<bool> updateOne(Products ProductRequest)
+        public async Task<Products?> updateOne(string id, Products ProductRequest)
         {
-            var result = _db.Products.Update(ProductRequest);
-            if (result == null)
+
+           var productToChange = await _db.Products.FirstOrDefaultAsync(x => x.products_Id == id);
+            if (productToChange == null)
             {
-                return false;
+                return null;
             }
-            await Save();
-            return true;
+           productToChange.name = ProductRequest.name;
+           productToChange.costprice = ProductRequest.costprice;
+           productToChange.msrp = ProductRequest.msrp;
+           productToChange.rop = ProductRequest.rop;
+           productToChange.eoq = ProductRequest.eoq;
+           productToChange.qoh = ProductRequest.qoh;
+           productToChange.qoo = ProductRequest.qoo;
+            if (await Save() == 1)
+                return productToChange;
+            return null;
         }
 
         public async Task<int> Save()
@@ -78,7 +87,7 @@ namespace PurchaseOrderBackEnd.Products
 
         public async Task<Products?> getById(string id)
         {
-            var prod = _db.Products.Where(p => p.id == id);
+            var prod = _db.Products.Where(p => p.products_Id == id);
             if (prod.FirstOrDefault() == null)
             {
                 return null;

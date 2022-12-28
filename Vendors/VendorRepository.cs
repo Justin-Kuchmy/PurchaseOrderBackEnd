@@ -12,12 +12,13 @@ namespace PurchaseOrderBackEnd.Vendors
         public VendorRepository(VendorAndProductsDBContext db)
         {
             _db = db;
+
         }
 
 
         public async Task<bool> deleteOne(int id)
         {
-            var vendor = await _db.Vendors.FindAsync();
+            var vendor = await _db.Vendors.FindAsync(id);
             if (vendor == null)
             {
                 return false;
@@ -41,15 +42,20 @@ namespace PurchaseOrderBackEnd.Vendors
             return vendorRequest;
 
         }        
-        public async Task<bool> updateOne(Vendors vendorRequest)
+        public async Task<Vendors?> updateOne(int id, Vendors vendorRequest)
         {
-            var result = _db.Vendors.Update(vendorRequest);
-            if (result == null)
+            var vendorToChange = await _db.Vendors.FirstOrDefaultAsync(x => x.Vendor_Id == id);
+   
+            
+            if (vendorToChange == null)
             {
-                return false;
+                return null;
             }
-            await Save();
-            return true;
+            vendorToChange.City = vendorRequest.City;
+
+            if(await Save() == 1)
+                return vendorToChange;
+            return null;
         }
 
         public async Task<int> Save()
@@ -62,6 +68,7 @@ namespace PurchaseOrderBackEnd.Vendors
         public async Task<List<Vendors>> findAll()
         {
             var vendors = await _db.Vendors.ToListAsync();
+            _db.ChangeTracker.Clear();
             return vendors;
         }
 

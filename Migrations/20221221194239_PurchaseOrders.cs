@@ -18,13 +18,13 @@ namespace PurchaseOrderBackEnd.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Products",
                 table: "Products",
-                column: "Id");
+                column: "products_Id");
 
             migrationBuilder.CreateTable(
                 name: "PurchaseOrderLineItems",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    LineItem_Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PurchaseOrdersid = table.Column<long>(type: "bigint", nullable: false),
                     productid = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -33,14 +33,14 @@ namespace PurchaseOrderBackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchaseOrderLineItems", x => x.id);
+                    table.PrimaryKey("PK_PurchaseOrderLineItems", x => x.LineItem_Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PurchaseOrders",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    po_id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     vendorid = table.Column<long>(type: "bigint", nullable: false),
                     amount = table.Column<double>(type: "float", nullable: false),
@@ -48,7 +48,7 @@ namespace PurchaseOrderBackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchaseOrders", x => x.id);
+                    table.PrimaryKey("PK_PurchaseOrders", x => x.po_id);
                 });
         }
 
@@ -65,14 +65,10 @@ namespace PurchaseOrderBackEnd.Migrations
                 name: "PK_Products",
                 table: "Products");
 
-            migrationBuilder.RenameTable(
-                name: "Products",
-                newName: "vendors");
-
             migrationBuilder.AddPrimaryKey(
                 name: "PK_vendors",
                 table: "vendors",
-                column: "Id");
+                column: "Vendor_Id");
         }
     }
 }

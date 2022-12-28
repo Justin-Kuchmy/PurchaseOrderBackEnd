@@ -31,13 +31,6 @@ public class PurchaseOrderController : Controller
         var PurchaseOrders = await _PurchaseOrderRepository.findAll();
         return Ok(PurchaseOrders);
     }
-    [HttpPut]
-    [Route("/api/pos")]
-    public Task<bool> updateOne([FromBody] PurchaseOrders PurchaseOrder)
-    {
-        var updatedPurchaseOrder = _PurchaseOrderRepository.updateOne(PurchaseOrder);
-        return updatedPurchaseOrder;
-    }
     [HttpPost]
     [Route("/api/pos")]
     public async Task<PurchaseOrders?> addOne([FromBody] PurchaseOrders purchaseOrder)

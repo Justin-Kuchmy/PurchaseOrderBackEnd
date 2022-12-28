@@ -25,11 +25,12 @@ public class VendorController : Controller
         return Ok(vendors);
     }
     [HttpPut]
-    [Route("/api/vendors")]
-    public Task<bool> updateOne(Vendors vendor)
+    [Route("/api/vendors/{id}")]
+    public async Task<IActionResult> updateOne([FromRoute] int id, Vendors updateVendorRequest)
     {
-        var updatedVendor = _vendorRepository.updateOne(vendor);
-        return updatedVendor;
+      
+        var updatedVendor = await _vendorRepository.updateOne(id, updateVendorRequest);
+        return Ok(updatedVendor);
     }
     [HttpPost]
     [Route("/api/vendors")]

@@ -2,13 +2,15 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 using PurchaseOrderBackEnd.PurchaseOrders;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PurchaseOrderBackEnd.PurchaseOrders
 {
     public class PurchaseOrders
     {
         [Key]
-        public long id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long po_id { get; set; }
         public long vendorid { get; set; }
         public double amount { get; set; } 
         public DateTime podate { get; set; }
