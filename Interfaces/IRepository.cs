@@ -9,7 +9,6 @@ namespace PurchaseOrderBackEnd.Interfaces
         Task<T?> updateOne(K type, T entity);
         Task<T?> addOne(T entity);
         Task<bool> deleteOne(K type);
-
         Task<int> Save();
     }
 }

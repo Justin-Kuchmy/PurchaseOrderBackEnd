@@ -3,6 +3,7 @@ using PurchaseOrderBackEnd.Vendors;
 using PurchaseOrderBackEnd.Products;
 using PurchaseOrderBackEnd.PurchaseOrders;
 using PurchaseOrderBackEnd.Data;
+using PurchaseOrderBackEnd;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using PurchaseOrderBackEnd.Migrations;
 using PurchaseOrderBackEnd.Interfaces;
@@ -24,6 +25,7 @@ builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<PurchaseOrderRepository>();
 builder.Services.AddScoped<PurchaseOrderLineItemRepository>();
 builder.Services.AddScoped<PurchaseOrderDAO>();
+builder.Services.AddScoped<QueryParameters>();
 
 builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, build =>
 {

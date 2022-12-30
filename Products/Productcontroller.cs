@@ -5,6 +5,7 @@ using PurchaseOrderBackEnd.Data;
 using PurchaseOrderBackEnd.Products;
 using PurchaseOrderBackEnd.Vendors;
 using System.Numerics;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -20,10 +21,11 @@ public class ProductController : Controller
     }
     [HttpGet]
     [Route("/api/Products")]
-    public async Task<IActionResult> findAll()
+    public async Task<IActionResult> findAll([FromQuery] QueryParameters queryParams)
     {
-        var Products = await _productRepository.findAll();
-        return Ok(Products);
+        IQueryable<Products> dbSet = _productRepository.findAllFromQuery();
+        dbSet = dbSet.Skip(queryParams.Size * (queryParams.Page - 1)).Take(queryParams.Size);
+        return Ok(await dbSet.ToArrayAsync());
     }
     [HttpGet]
     [Route("/api/Products/{id}")]

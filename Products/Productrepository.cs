@@ -74,7 +74,12 @@ namespace PurchaseOrderBackEnd.Products
 
         public async Task<List<Products>> findAll()
         {
-            var Products = await _db.Products.ToListAsync();
+            throw new NotImplementedException();
+        }
+
+        public DbSet<Products> findAllFromQuery()
+        {
+            var Products = _db.Products;
             return Products;
         }
 
