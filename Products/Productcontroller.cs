@@ -37,6 +37,19 @@ public class ProductController : Controller
                 p => p.costprice <= queryParams.MaxPrice.Value);
         }
 
+        if (!string.IsNullOrEmpty(queryParams.Products_id))
+        {
+            dbSet = dbSet.Where(
+                p => p.products_Id == queryParams.Products_id);
+        }
+
+        if (!string.IsNullOrEmpty(queryParams.Name))
+        {
+            dbSet = dbSet.Where(
+                p => p.name.ToLower().Contains(
+                    queryParams.Name.ToLower()));
+        }
+
         dbSet = dbSet.Skip(queryParams.Size * (queryParams.Page - 1)).Take(queryParams.Size);
         return Ok(await dbSet.ToArrayAsync());
     }

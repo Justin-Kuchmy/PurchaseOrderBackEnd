@@ -9,7 +9,7 @@ namespace PurchaseOrderBackEnd.Products
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string products_Id { get; set; } = "";
         public int vendorid { get; set; }
-        public string? name { get; set; }
+        public string name { get; set; } = "";
         public double costprice { get; set; }
         public double msrp { get; set; }
         public int rop { get; set; }
