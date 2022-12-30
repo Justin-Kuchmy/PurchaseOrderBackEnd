@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PurchaseOrderBackEnd;
 using PurchaseOrderBackEnd.Data;
 using PurchaseOrderBackEnd.Products;
+using PurchaseOrderBackEnd.Queries;
 using PurchaseOrderBackEnd.Vendors;
 using System.Numerics;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -21,9 +21,22 @@ public class ProductController : Controller
     }
     [HttpGet]
     [Route("/api/Products")]
-    public async Task<IActionResult> findAll([FromQuery] QueryParameters queryParams)
+    public async Task<IActionResult> findAll([FromQuery] ProductQueryParameters queryParams)
     {
         IQueryable<Products> dbSet = _productRepository.findAllFromQuery();
+
+        if (queryParams.MinPrice != null)
+        {
+            dbSet = dbSet.Where(
+                p => p.costprice >= queryParams.MinPrice.Value);
+        }
+
+        if (queryParams.MaxPrice != null)
+        {
+            dbSet = dbSet.Where(
+                p => p.costprice <= queryParams.MaxPrice.Value);
+        }
+
         dbSet = dbSet.Skip(queryParams.Size * (queryParams.Page - 1)).Take(queryParams.Size);
         return Ok(await dbSet.ToArrayAsync());
     }

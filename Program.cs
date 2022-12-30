@@ -3,10 +3,10 @@ using PurchaseOrderBackEnd.Vendors;
 using PurchaseOrderBackEnd.Products;
 using PurchaseOrderBackEnd.PurchaseOrders;
 using PurchaseOrderBackEnd.Data;
-using PurchaseOrderBackEnd;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using PurchaseOrderBackEnd.Migrations;
 using PurchaseOrderBackEnd.Interfaces;
+using PurchaseOrderBackEnd.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
