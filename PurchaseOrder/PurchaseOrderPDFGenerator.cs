@@ -13,15 +13,16 @@ using System.Text;
 using System.Drawing;
 using PurchaseOrderBackEnd.Products;
 using PurchaseOrderBackEnd.Vendors;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PurchaseOrderBackEnd.PurchaseOrders
 {
     public abstract class PurchaseOrderPDFGenerator
     {
-        public static MemoryStream generateReport( string poid,VendorRepository vendorRepository,ProductRepository productRepository,PurchaseOrderRepository purchaseorderRepository)
+        public static MemoryStream generateReport(long poid,VendorRepository vendorRepository,ProductRepository productRepository,PurchaseOrderRepository purchaseorderRepository)
         {
-
-            return new MemoryStream();
+            MemoryStream memory = new MemoryStream();
+            return memory;
         }
     }
 
