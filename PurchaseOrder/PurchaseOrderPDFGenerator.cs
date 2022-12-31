@@ -22,6 +22,12 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
         public static MemoryStream generateReport(long poid,VendorRepository vendorRepository,ProductRepository productRepository,PurchaseOrderRepository purchaseorderRepository)
         {
             MemoryStream memory = new MemoryStream();
+
+            string Example = "Example Content";
+            byte[] byteInfo = Encoding.ASCII.GetBytes(Example);
+            memory.Write(byteInfo, 0, byteInfo.Length);
+            memory.Position = 0;
+
             return memory;
         }
     }
