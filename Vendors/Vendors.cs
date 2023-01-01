@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PurchaseOrderBackEnd.Vendors { 
     public class Vendors {
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int table_key = default;
         public int Vendor_Id { get; set; }
         public string Address1 { get; set; } = "";
         public string City { get; set; } = "";

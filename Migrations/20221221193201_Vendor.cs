@@ -14,6 +14,7 @@ namespace PurchaseOrderBackEnd.Migrations
                 name: "Product",
                 columns: table => new
                 {
+                    table_key = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
                     products_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     vendorid = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -30,12 +31,12 @@ namespace PurchaseOrderBackEnd.Migrations
                 {
                     table.PrimaryKey("PK_Product", x => x.products_Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "Vendors",
                 columns: table => new
                 {
-                    Vendor_Id = table.Column<int>(type: "int", nullable: false),//.Annotation("SqlServer:Identity", "1, 1"),
+                    table_key = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
+                    Vendor_Id = table.Column<int>(type: "int", nullable: false),
                     Address1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: false),

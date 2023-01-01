@@ -8,8 +8,6 @@ namespace PurchaseOrderBackEnd.PurchaseOrders
 {
     public class PurchaseOrders
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long po_id { get; set; }
         public long vendorid { get; set; }
         public double amount { get; set; } 

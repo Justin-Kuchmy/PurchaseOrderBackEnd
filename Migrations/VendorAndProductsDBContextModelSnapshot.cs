@@ -22,21 +22,22 @@ namespace PurchaseOrderBackEnd.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("PurchaseOrderBackEnd.Products.Product", b =>
+            modelBuilder.Entity("PurchaseOrderBackEnd.Products.Products", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("products_Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<long>("costprice")
-                        .HasColumnType("bigint");
+                    b.Property<double>("costprice")
+                        .HasColumnType("float");
 
                     b.Property<int>("eoq")
                         .HasColumnType("int");
 
-                    b.Property<long>("msrp")
-                        .HasColumnType("bigint");
+                    b.Property<double>("msrp")
+                        .HasColumnType("float");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("qoh")
@@ -57,47 +58,45 @@ namespace PurchaseOrderBackEnd.Migrations
                     b.Property<int>("vendorid")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("products_Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrderLineItems.PurchaseOrderLineItem", b =>
+            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrderLineItems", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("LineItem_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("LineItem_Id"));
 
-                    b.Property<long>("poid")
+                    b.Property<long>("PurchaseOrdersid")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("price")
-                        .HasColumnType("bigint");
+                    b.Property<double>("price")
+                        .HasColumnType("float");
 
                     b.Property<string>("productid")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("qty")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("LineItem_Id");
+
+                    b.HasIndex("PurchaseOrdersid");
 
                     b.ToTable("PurchaseOrderLineItems");
                 });
 
-            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrder", b =>
+            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrders", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("po_id")
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("amount")
-                        .HasColumnType("bigint");
+                    b.Property<double>("amount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("podate")
                         .HasColumnType("datetime2");
@@ -105,18 +104,18 @@ namespace PurchaseOrderBackEnd.Migrations
                     b.Property<long>("vendorid")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("po_id");
 
                     b.ToTable("PurchaseOrders");
                 });
 
-            modelBuilder.Entity("PurchaseOrderBackEnd.Vendors.Vendor", b =>
+            modelBuilder.Entity("PurchaseOrderBackEnd.Vendors.Vendors", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Vendor_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Vendor_Id"));
 
                     b.Property<string>("Address1")
                         .IsRequired()
@@ -150,9 +149,23 @@ namespace PurchaseOrderBackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Vendor_Id");
 
                     b.ToTable("Vendors");
+                });
+
+            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrderLineItems", b =>
+                {
+                    b.HasOne("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrders", null)
+                        .WithMany("items")
+                        .HasForeignKey("PurchaseOrdersid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PurchaseOrderBackEnd.PurchaseOrders.PurchaseOrders", b =>
+                {
+                    b.Navigation("items");
                 });
 #pragma warning restore 612, 618
         }

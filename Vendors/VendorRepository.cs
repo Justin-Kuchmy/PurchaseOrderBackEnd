@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PurchaseOrderBackEnd.Data;
 using PurchaseOrderBackEnd.Interfaces;
@@ -33,6 +34,11 @@ namespace PurchaseOrderBackEnd.Vendors
         }
         public async Task<Vendors?> addOne(Vendors vendorRequest)
         {
+            var p = new SqlParameter("@result", System.Data.SqlDbType.Int);
+            p.Direction = System.Data.ParameterDirection.Output;
+            _db.Database.ExecuteSqlRaw("set @result = NEXT VALUE FOR dbo.Id_Sequence", p);
+            var nextVal = (int)p.Value;
+            vendorRequest.Vendor_Id = nextVal;
             var result = await _db.Vendors.AddAsync(vendorRequest);
             if (result == null)
             {

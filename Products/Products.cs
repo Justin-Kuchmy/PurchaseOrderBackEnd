@@ -5,8 +5,6 @@ namespace PurchaseOrderBackEnd.Products
 {
     public class Products
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string products_Id { get; set; } = "";
         public int vendorid { get; set; }
         public string name { get; set; } = "";

@@ -24,8 +24,8 @@ namespace PurchaseOrderBackEnd.Migrations
                 name: "PurchaseOrderLineItems",
                 columns: table => new
                 {
-                    LineItem_Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    table_key = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
+                    LineItem_Id = table.Column<long>(type: "bigint", nullable: false),
                     PurchaseOrdersid = table.Column<long>(type: "bigint", nullable: false),
                     productid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     qty = table.Column<int>(type: "int", nullable: false),
@@ -40,8 +40,8 @@ namespace PurchaseOrderBackEnd.Migrations
                 name: "PurchaseOrders",
                 columns: table => new
                 {
-                    po_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    table_key = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
+                    po_id = table.Column<long>(type: "bigint", nullable: false),
                     vendorid = table.Column<long>(type: "bigint", nullable: false),
                     amount = table.Column<double>(type: "float", nullable: false),
                     podate = table.Column<DateTime>(type: "datetime2", nullable: false)
